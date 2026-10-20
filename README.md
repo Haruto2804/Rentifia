@@ -16,15 +16,15 @@ Tại các đô thị lớn như TP.HCM, phần lớn các chủ trọ và đơn
 - Khó kiểm soát công nợ lũy kế và thiếu tính minh bạch với người thuê[cite: 2].
 
 **Rentifia** giải quyết trọn vẹn quy trình nghiệp vụ cốt lõi (**End-to-End Workflow**) trong 10 tuần[cite: 2]:
-$$\text{Xếp phòng \& Ký HĐ} \longrightarrow \text{Chốt Điện/Nước kèm ảnh đối chứng} \longrightarrow \text{Tự động tính \& Phát hành Hóa đơn} \longrightarrow \text{Thanh toán VietQR \& Gạch nợ}$$
-[cite: 2]
+
+> **Xếp phòng & Ký HĐ** ➔ **Chốt Điện/Nước có ảnh đối chứng** ➔ **Tự động tính & Phát hành Hóa đơn** ➔ **Thanh toán VietQR & Gạch nợ**[cite: 2]
 
 ---
 
 ## 2. Công nghệ sử dụng (Tech Stack)
 
-- **Ngôn ngữ Back-end:** PHP (Kiến trúc MVC OOP)[cite: 2]
-- **Cơ sở dữ liệu:** MySQL (Ràng buộc toàn vẹn, Khóa ngoại, Transaction)[cite: 2, 4, 5]
+- **Back-end:** PHP (Kiến trúc MVC OOP)[cite: 2]
+- **Cơ sở dữ liệu:** MySQL (InnoDB, Khóa ngoại, Database Transaction)[cite: 2, 4, 5]
 - **Front-end:** HTML5, CSS3, Tailwind CSS / Bootstrap 5, JavaScript Vanilla[cite: 2]
 - **Tích hợp bên thứ ba:**
   - **VietQR API:** Tự động tạo mã QR động thanh toán theo từng hóa đơn[cite: 2].
@@ -56,10 +56,10 @@ $$\text{Xếp phòng \& Ký HĐ} \longrightarrow \text{Chốt Điện/Nước k�
 - Truy cập liên kết hóa đơn điện tử rút gọn (qua Zalo/SMS) để xem phiếu báo tiền và quét mã QR thanh toán nhanh không cần đăng nhập[cite: 3].
 
 ### 3.5. Cơ chế xử lý nghiệp vụ tự động (System Logic)
-- **Đồng bộ trạng thái:** Hợp đồng kích hoạt $\rightarrow$ Phòng chuyển `Đang thuê`; Hợp đồng thanh lý $\rightarrow$ Phòng chuyển `Trống`[cite: 3].
+- **Đồng bộ trạng thái:** Hợp đồng kích hoạt ➔ Phòng chuyển `Đang thuê`; Hợp đồng thanh lý ➔ Phòng chuyển `Trống`[cite: 3].
 - **Ràng buộc kiểm tra số liệu (Validation):** Ngăn chặn nhập `Chỉ số mới < Chỉ số cũ`, tự động kế thừa chỉ số cuối kỳ trước sang kỳ kế tiếp[cite: 3].
 - **Billing Engine:** Tính toán tiền lẻ theo ngày thực ở (nếu nhận phòng giữa tháng), nhân sản lượng tiêu thụ theo đơn giá cấu hình, cộng dồn nợ cũ[cite: 3].
-- **Snapshot đơn giá:** Đóng băng đơn giá tại thời điểm xuất hóa đơn vào `invoice_details` để tránh sai lệch lịch sử nếu tương lai tăng giá dịch vụ.
+- **Snapshot đơn giá:** Đóng băng đơn giá tại thời điểm xuất hóa đơn vào bảng chi tiết để không bị sai lệch lịch sử nếu tương lai tăng giá dịch vụ.
 
 ---
 
@@ -69,12 +69,12 @@ $$\text{Xếp phòng \& Ký HĐ} \longrightarrow \text{Chốt Điện/Nước k�
 Rentifia/
 ├── app/
 │   ├── Controllers/      # Điều phối request (Admin, Manager, Tenant, Guest, Auth)
-│   ├── Core/             # App, Router, Base Controller, Base Model, Request, Response, Session
+│   ├── Core/             # MVC Core: App, Router, Controller, Model, Request, Response
 │   ├── Middlewares/      # Bộ lọc xác thực và phân quyền RBAC
 │   ├── Models/           # Tương tác MySQL: Room, Contract, Invoice, MeterReading...
 │   ├── Services/         # BillingCalculator, VietQR, CloudinaryUpload, PdfExport
 │   └── Views/            # Layouts, Partials, View nghiệp vụ và mẫu in PDF
-├── config/               # app.php, database.php, cloudinary.php, vietqr.php, constants.php
+├── config/               # Cấu hình CSDL, Cloudinary, VietQR, Constants
 ├── database/             # schema.sql (ERD), seeders.sql (dữ liệu mẫu)
 ├── public/               # Web Root (.htaccess, index.php, assets CSS/JS/Images)
 ├── routes/               # Định tuyến web.php
