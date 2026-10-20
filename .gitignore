@@ -1,0 +1,48 @@
+# 1. Thư viện bên thứ ba (Composer)
+/vendor/
+
+# 2. File môi trường & bí mật (Bắt buộc ẩn để tránh lộ DB password, Cloudinary API key)
+.env
+.env.backup
+.env.local
+*.env
+
+# 3. Thư mục lưu trữ tạm, Logs & Cache
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/pdf_cache/*
+!/storage/pdf_cache/.gitkeep
+
+# 4. File uploads của người dùng (nếu lưu local thay vì cloud)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# 5. File rác từ hệ điều hành & Editor / IDE
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code / PHPStorm
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+
+# 6. File log cài đặt & kiểm thử
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+composer.phar
