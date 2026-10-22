@@ -3,7 +3,6 @@ namespace App\Controllers\Admin;
 
 use App\Core\Database;
 use App\Model\User;
-use Exception;
 use PDO;
 use PDOException;
 class UserController
@@ -30,17 +29,33 @@ class UserController
         }
     }
 
-    public function findById(int $id): ?array
+    public function findById(int $id): ?User
     {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id LIMIT 1");
             $stmt->execute(['id' => $id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Kiểm tra nếu không có bản ghi thì return null ngay
+            if (!$data) {
+                return null;
+            }
+            return new User(
+                (int) $data['id'],
+                $data['username'],
+                $data['password_hash'],
+                $data['email'],
+                $data['role'] ?? 'tenant',
+                $data['reset_token'] ?? null,
+                (bool) ($data['is_active'] ?? true),
+                $data['created_at'] ?? null,
+                $data['updated_at'] ?? null
+            );
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return null;
         }
     }
+
     public function deleteById(int $id): bool
     {
         $foundUser = $this->findById($id);
@@ -120,13 +135,38 @@ class UserController
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 'password_hash' => $password_hash,
-                'id'            => $id
+                'id' => $id
             ]);
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
     }
+    public function findByUsername(string $username): ?User
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['username' => $username]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$data) {
+                return null;
+            }
+            return new User(
+                (int) $data['id'],
+                $data['username'],
+                $data['password_hash'],
+                $data['email'],
+                $data['role'] ?? 'tenant',
+                $data['reset_token'] ?? null,
+                (bool) ($data['is_active'] ?? true),
+                $data['created_at'] ?? null,
+                $data['updated_at'] ?? null
+            );
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
 }
-
 ?>
