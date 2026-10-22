@@ -142,7 +142,7 @@ function getRoleBadgeClass($role)
                             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                     <?php if ($currentUser): ?>
-                        Đang chỉnh sửa người dùng: <span class="text-blue-600 font-mono">#<?= htmlspecialchars($currentUser['id']) ?> - <?= htmlspecialchars($currentUser['username']) ?></span>
+                        Đang chỉnh sửa người dùng: <span class="text-blue-600 font-mono">#<?= htmlspecialchars((string) $currentUser->getId()) ?> - <?= htmlspecialchars($currentUser->getUsername()) ?></span>
                     <?php else: ?>
                         Nhập ID hoặc chọn người dùng bên dưới để chỉnh sửa
                     <?php endif; ?>
@@ -174,7 +174,7 @@ function getRoleBadgeClass($role)
             <?php if ($currentUser): ?>
                 <form method="POST" class="space-y-4">
                     <input type="hidden" name="action" value="update_user">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($currentUser['id']) ?>">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars((string) $currentUser->getId()) ?>">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- ID hiển thị chỉ đọc -->
@@ -182,7 +182,7 @@ function getRoleBadgeClass($role)
                             <label class="block text-xs font-semibold text-slate-600 mb-1">
                                 User ID (Khóa chính)
                             </label>
-                            <input type="text" disabled value="#<?= htmlspecialchars($currentUser['id']) ?>"
+                            <input type="text" disabled value="#<?= htmlspecialchars((string) $currentUser->getId()) ?>"
                                 class="w-full px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-sm font-mono text-slate-500 cursor-not-allowed">
                         </div>
 
@@ -192,7 +192,7 @@ function getRoleBadgeClass($role)
                                 Tên đăng nhập (Username) <span class="text-rose-500">*</span>
                             </label>
                             <input type="text" name="username" id="username" required
-                                value="<?= htmlspecialchars($currentUser['username']) ?>"
+                                value="<?= htmlspecialchars($currentUser->getUsername()) ?>"
                                 class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium">
                         </div>
 
@@ -202,7 +202,7 @@ function getRoleBadgeClass($role)
                                 Địa chỉ Email <span class="text-rose-500">*</span>
                             </label>
                             <input type="email" name="email" id="email" required
-                                value="<?= htmlspecialchars($currentUser['email']) ?>"
+                                value="<?= htmlspecialchars($currentUser->getEmail()) ?>"
                                 class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-mono">
                         </div>
 
@@ -214,9 +214,9 @@ function getRoleBadgeClass($role)
                                 </label>
                                 <select name="role" id="role"
                                     class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
-                                    <option value="tenant" <?= strtolower($currentUser['role'] ?? '') === 'tenant' ? 'selected' : '' ?>>Tenant (Khách thuê)</option>
-                                    <option value="manager" <?= strtolower($currentUser['role'] ?? '') === 'manager' ? 'selected' : '' ?>>Manager (Quản lý)</option>
-                                    <option value="admin" <?= strtolower($currentUser['role'] ?? '') === 'admin' ? 'selected' : '' ?>>Admin (Quản trị viên)</option>
+                                    <option value="tenant" <?= strtolower($currentUser->getRole()) === 'tenant' ? 'selected' : '' ?>>Tenant (Khách thuê)</option>
+                                    <option value="manager" <?= strtolower($currentUser->getRole()) === 'manager' ? 'selected' : '' ?>>Manager (Quản lý)</option>
+                                    <option value="admin" <?= strtolower($currentUser->getRole()) === 'admin' ? 'selected' : '' ?>>Admin (Quản trị viên)</option>
                                 </select>
                             </div>
 
@@ -226,8 +226,8 @@ function getRoleBadgeClass($role)
                                 </label>
                                 <select name="is_active" id="is_active"
                                     class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
-                                    <option value="1" <?= ($currentUser['is_active'] ?? 1) == 1 ? 'selected' : '' ?>>Hoạt động (Active)</option>
-                                    <option value="0" <?= ($currentUser['is_active'] ?? 1) == 0 ? 'selected' : '' ?>>Khóa (Inactive)</option>
+                                    <option value="1" <?= $currentUser->getIsActive() ? 'selected' : '' ?>>Hoạt động (Active)</option>
+                                    <option value="0" <?= !$currentUser->getIsActive() ? 'selected' : '' ?>>Khóa (Inactive)</option>
                                 </select>
                             </div>
                         </div>
@@ -284,7 +284,7 @@ function getRoleBadgeClass($role)
                             </tr>
                         <?php else: ?>
                             <?php foreach ($userList as $u): ?>
-                                <tr class="hover:bg-slate-50/80 transition-colors <?= ($currentUser && $currentUser['id'] == $u['id']) ? 'bg-blue-50/50' : '' ?>">
+                                <tr class="hover:bg-slate-50/80 transition-colors <?= ($currentUser && $currentUser->getId() == $u['id']) ? 'bg-blue-50/50' : '' ?>">
                                     <td class="py-3.5 px-6 font-mono text-xs font-bold text-slate-500">
                                         #<?= htmlspecialchars($u['id']) ?>
                                     </td>

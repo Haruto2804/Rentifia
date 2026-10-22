@@ -59,8 +59,8 @@ function getRoleBadgeClass($role)
             </div>
             <h1 class="text-2xl font-bold text-slate-900">Kiểm Thử Phương Thức findById()</h1>
             <p class="text-sm text-slate-500 mt-1">
-                Gọi trực tiếp <code
-                    class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono">App\Model\User::findById(int $id)</code>
+                Gọi qua <code
+                    class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono">App\Controllers\Admin\UserController::findById(int $id)</code>
             </p>
         </div>
 
@@ -117,17 +117,17 @@ function getRoleBadgeClass($role)
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center font-bold text-2xl text-white border border-white/30 shadow-inner">
-                                <?= strtoupper(substr($user['username'] ?? 'U', 0, 1)) ?>
+                                <?= strtoupper(substr($user->getUsername() ?? 'U', 0, 1)) ?>
                             </div>
                             <div>
-                                <h2 class="text-xl font-bold"><?= htmlspecialchars($user['username'] ?? '') ?></h2>
+                                <h2 class="text-xl font-bold"><?= htmlspecialchars($user->getUsername() ?? '') ?></h2>
                                 <p class="text-xs text-indigo-100 font-mono mt-0.5">
-                                    <?= htmlspecialchars($user['email'] ?? '') ?>
+                                    <?= htmlspecialchars($user->getEmail() ?? '') ?>
                                 </p>
                             </div>
                         </div>
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-indigo-700 shadow-sm">
-                            ID #<?= htmlspecialchars($user['id'] ?? '') ?>
+                            ID #<?= htmlspecialchars((string) $user->getId()) ?>
                         </span>
                     </div>
 
@@ -135,14 +135,14 @@ function getRoleBadgeClass($role)
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Vai trò (Role):</span>
                             <span
-                                class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold border <?= getRoleBadgeClass($user['role'] ?? '') ?>">
-                                <?= htmlspecialchars(strtoupper($user['role'] ?? 'TENANT')) ?>
+                                class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold border <?= getRoleBadgeClass($user->getRole()) ?>">
+                                <?= htmlspecialchars(strtoupper($user->getRole())) ?>
                             </span>
                         </div>
 
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Trạng thái:</span>
-                            <?php if (($user['is_active'] ?? 1) == 1): ?>
+                            <?php if ($user->getIsActive()): ?>
                                 <span
                                     class="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
                                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -160,29 +160,29 @@ function getRoleBadgeClass($role)
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Reset Token:</span>
                             <span class="font-mono text-xs text-slate-600">
-                                <?= $user['reset_token'] ? htmlspecialchars($user['reset_token']) : '<span class="text-slate-400 italic">null (Không có)</span>' ?>
+                                <?= $user->getResetToken() ? htmlspecialchars($user->getResetToken()) : '<span class="text-slate-400 italic">null (Không có)</span>' ?>
                             </span>
                         </div>
 
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Mã băm mật khẩu:</span>
                             <span class="font-mono text-xs text-slate-400 truncate max-w-xs"
-                                title="<?= htmlspecialchars($user['password_hash'] ?? '') ?>">
-                                <?= htmlspecialchars(substr($user['password_hash'] ?? '', 0, 20)) ?>...
+                                title="<?= htmlspecialchars($user->getPasswordHash() ?? '') ?>">
+                                <?= htmlspecialchars(substr($user->getPasswordHash() ?? '', 0, 20)) ?>...
                             </span>
                         </div>
 
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Ngày tạo:</span>
                             <span class="font-mono text-xs text-slate-600">
-                                <?= htmlspecialchars($user['created_at'] ?? 'N/A') ?>
+                                <?= htmlspecialchars($user->getCreatedAt() ?? 'N/A') ?>
                             </span>
                         </div>
 
                         <div class="py-3 flex items-center justify-between">
                             <span class="text-slate-500">Cập nhật lần cuối:</span>
                             <span class="font-mono text-xs text-slate-600">
-                                <?= htmlspecialchars($user['updated_at'] ?? 'N/A') ?>
+                                <?= htmlspecialchars($user->getUpdatedAt() ?? 'N/A') ?>
                             </span>
                         </div>
                     </div>

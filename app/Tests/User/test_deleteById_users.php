@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             // Thực hiện xóa
             $result = $userController->deleteById($deleteId);
             if ($result) {
-                $message = "Đã xóa thành công người dùng #{$deleteId} ('" . htmlspecialchars($targetUser['username']) . "')!";
+                $message = "Đã xóa thành công người dùng #{$deleteId} ('" . htmlspecialchars($targetUser->getUsername()) . "')!";
                 $messageType = 'success';
             } else {
                 $message = "Không thể xóa người dùng #{$deleteId}. (Có thể do ràng buộc dữ liệu khóa ngoại trong CSDL).";

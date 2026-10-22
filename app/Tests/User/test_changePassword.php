@@ -18,8 +18,8 @@ $currentUser = null;
 
 // Xử lý khi Submit Form đổi mật khẩu (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_password') {
-    $id              = (int) ($_POST['id'] ?? 0);
-    $newPassword     = trim($_POST['new_password'] ?? '');
+    $id = (int) ($_POST['id'] ?? 0);
+    $newPassword = trim($_POST['new_password'] ?? '');
     $confirmPassword = trim($_POST['confirm_password'] ?? '');
 
     if ($id <= 0) {
@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
             // Kiểm tra lại bằng password_verify để xác thực hash trong DB
             $updatedUser = $userController->findById($id);
-            if ($updatedUser && password_verify($newPassword, $updatedUser['password_hash'])) {
+            if ($updatedUser && password_verify($newPassword, $updatedUser->getPasswordHash())) {
                 $verifyResult = [
                     'verified' => true,
-                    'hash'     => $updatedUser['password_hash']
+                    'hash' => $updatedUser->getPasswordHash()
                 ];
             }
         } else {
@@ -100,31 +100,38 @@ function getRoleBadgeClass($role)
             </div>
             <h1 class="text-2xl font-bold text-slate-900">Kiểm Thử Phương Thức changePassword()</h1>
             <p class="text-sm text-slate-500 mt-1">
-                Gọi qua <code class="bg-slate-100 px-1.5 py-0.5 rounded text-amber-600 font-mono">App\Controllers\Admin\UserController::changePassword(int $id, string $newPassword)</code>
+                Gọi qua <code
+                    class="bg-slate-100 px-1.5 py-0.5 rounded text-amber-600 font-mono">App\Controllers\Admin\UserController::changePassword(int $id, string $newPassword)</code>
             </p>
         </div>
 
         <!-- Thông báo kết quả nếu có -->
         <?php if ($message): ?>
             <div class="p-4 mb-6 rounded-2xl border <?php
-                echo match($messageType) {
-                    'success' => 'bg-emerald-50 border-emerald-200 text-emerald-800',
-                    'error' => 'bg-rose-50 border-rose-200 text-rose-800',
-                    default => 'bg-amber-50 border-amber-200 text-amber-800'
-                };
+            echo match ($messageType) {
+                'success' => 'bg-emerald-50 border-emerald-200 text-emerald-800',
+                'error' => 'bg-rose-50 border-rose-200 text-rose-800',
+                default => 'bg-amber-50 border-amber-200 text-amber-800'
+            };
             ?>">
                 <div class="flex items-start gap-3">
                     <?php if ($messageType === 'success'): ?>
                         <svg class="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd" />
                         </svg>
                     <?php elseif ($messageType === 'error'): ?>
                         <svg class="w-5 h-5 text-rose-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
                         </svg>
                     <?php else: ?>
                         <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
                         </svg>
                     <?php endif; ?>
                     <div>
@@ -133,7 +140,9 @@ function getRoleBadgeClass($role)
                             <div class="mt-2 text-xs bg-emerald-100/70 p-3 rounded-xl border border-emerald-200">
                                 <span class="font-bold text-emerald-900">✓ Xác thực mật khẩu tự động:</span>
                                 Mã hash mới trong CSDL khớp 100% với mật khẩu vừa nhập (`password_verify() = true`).
-                                <div class="font-mono text-[11px] text-emerald-800 truncate mt-1">Hash: <?= htmlspecialchars($verifyResult['hash']) ?></div>
+                                <div class="font-mono text-[11px] text-emerald-800 truncate mt-1">Hash:
+                                    <?= htmlspecialchars($verifyResult['hash']) ?>
+                                </div>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -150,7 +159,9 @@ function getRoleBadgeClass($role)
                             d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                     </svg>
                     <?php if ($currentUser): ?>
-                        Đang đổi mật khẩu cho: <span class="text-amber-600 font-mono">#<?= htmlspecialchars($currentUser['id']) ?> - <?= htmlspecialchars($currentUser['username']) ?></span>
+                        Đang đổi mật khẩu cho: <span
+                            class="text-amber-600 font-mono">#<?= htmlspecialchars($currentUser->getId()) ?> -
+                            <?= htmlspecialchars($currentUser->getUsername()) ?></span>
                     <?php else: ?>
                         Chọn người dùng bên dưới để đổi mật khẩu
                     <?php endif; ?>
@@ -173,7 +184,8 @@ function getRoleBadgeClass($role)
                         <input type="number" name="id" id="select_id" required min="1" placeholder="Ví dụ: 2, 3..."
                             class="w-full px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 font-mono">
                     </div>
-                    <button type="submit" class="mt-5 px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium rounded-lg transition-all">
+                    <button type="submit"
+                        class="mt-5 px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium rounded-lg transition-all">
                         Tải người dùng
                     </button>
                 </form>
@@ -181,20 +193,23 @@ function getRoleBadgeClass($role)
 
             <!-- Nếu đã chọn user: Hiển thị form đổi mật khẩu -->
             <?php if ($currentUser): ?>
-                <div class="mb-5 p-3.5 bg-amber-50/60 rounded-xl border border-amber-100 flex items-center justify-between text-xs">
+                <div
+                    class="mb-5 p-3.5 bg-amber-50/60 rounded-xl border border-amber-100 flex items-center justify-between text-xs">
                     <div>
                         <span class="text-slate-500">Người dùng:</span>
-                        <strong class="text-slate-800 ml-1"><?= htmlspecialchars($currentUser['username']) ?></strong>
-                        <span class="text-slate-400 ml-2 font-mono">(<?= htmlspecialchars($currentUser['email']) ?>)</span>
+                        <strong class="text-slate-800 ml-1"><?= htmlspecialchars($currentUser->getUsername()) ?></strong>
+                        <span
+                            class="text-slate-400 ml-2 font-mono">(<?= htmlspecialchars($currentUser->getEmail()) ?>)</span>
                     </div>
-                    <span class="px-2.5 py-0.5 rounded-full font-medium border <?= getRoleBadgeClass($currentUser['role'] ?? '') ?>">
-                        <?= strtoupper($currentUser['role'] ?? 'TENANT') ?>
+                    <span
+                        class="px-2.5 py-0.5 rounded-full font-medium border <?= getRoleBadgeClass($currentUser->getRole()) ?>">
+                        <?= strtoupper($currentUser->getRole()) ?>
                     </span>
                 </div>
 
                 <form method="POST" class="space-y-4">
                     <input type="hidden" name="action" value="change_password">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($currentUser['id']) ?>">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($currentUser->getId()) ?>">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Mật khẩu mới -->
@@ -220,7 +235,8 @@ function getRoleBadgeClass($role)
 
                     <!-- Nút Submit -->
                     <div class="pt-2 flex justify-end gap-3">
-                        <a href="test_changePassword.php" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-medium rounded-xl transition-all">
+                        <a href="test_changePassword.php"
+                            class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-medium rounded-xl transition-all">
                             Hủy bỏ
                         </a>
                         <button type="submit"
@@ -241,7 +257,8 @@ function getRoleBadgeClass($role)
             <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                 <div>
                     <h2 class="text-base font-bold text-slate-900">Danh sách người dùng hiện có trong Database</h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Bấm nút "Đổi MK" để chọn nhanh người dùng cần đổi mật khẩu</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Bấm nút "Đổi MK" để chọn nhanh người dùng cần đổi mật khẩu
+                    </p>
                 </div>
                 <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-semibold">
                     Tổng: <?= count($userList) ?> người dùng
@@ -251,7 +268,8 @@ function getRoleBadgeClass($role)
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse text-sm">
                     <thead>
-                        <tr class="bg-slate-50 border-b border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                        <tr
+                            class="bg-slate-50 border-b border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-500">
                             <th class="py-3 px-6">ID</th>
                             <th class="py-3 px-6">Username</th>
                             <th class="py-3 px-6">Email</th>
@@ -269,7 +287,8 @@ function getRoleBadgeClass($role)
                             </tr>
                         <?php else: ?>
                             <?php foreach ($userList as $u): ?>
-                                <tr class="hover:bg-slate-50/80 transition-colors <?= ($currentUser && $currentUser['id'] == $u['id']) ? 'bg-amber-50/50' : '' ?>">
+                                <tr
+                                    class="hover:bg-slate-50/80 transition-colors <?= ($currentUser && $currentUser->getId() == $u['id']) ? 'bg-amber-50/50' : '' ?>">
                                     <td class="py-3.5 px-6 font-mono text-xs font-bold text-slate-500">
                                         #<?= htmlspecialchars($u['id']) ?>
                                     </td>
@@ -280,7 +299,8 @@ function getRoleBadgeClass($role)
                                         <?= htmlspecialchars($u['email']) ?>
                                     </td>
                                     <td class="py-3.5 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border <?= getRoleBadgeClass($u['role'] ?? '') ?>">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border <?= getRoleBadgeClass($u['role'] ?? '') ?>">
                                             <?= htmlspecialchars(strtoupper($u['role'] ?? 'TENANT')) ?>
                                         </span>
                                     </td>
