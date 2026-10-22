@@ -7,7 +7,6 @@ use PDOException;
 
 class Database
 {
-    // 1. Chỉ được khai báo thuộc tính ở đây (phải có private/protected/public)
     private static ?PDO $instance = null;
 
     // 2. Khóa hàm khởi tạo để không ai dùng "new Database()" được
