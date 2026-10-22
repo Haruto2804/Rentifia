@@ -1,17 +1,18 @@
 <?php
 
-// 1. Nạp Database và Model User
-require_once __DIR__ . '/../Models/User.php';
-require_once __DIR__ . '/../Core/Database.php';
+// 1. Nạp Database, Model và Controller
+require_once __DIR__ . '/../../Core/Database.php';
+require_once __DIR__ . '/../../Models/User.php';
+require_once __DIR__ . '/../../Controllers/Admin/UserController.php';
 
-use App\Model\User;
+use App\Controllers\Admin\UserController;
 
 $errorMessage = null;
 $users = [];
 
 try {
-    $userModel = new User();
-    $users = $userModel->getAllUsers();
+    $userController = new UserController();
+    $users = $userController->getAll();
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
 }

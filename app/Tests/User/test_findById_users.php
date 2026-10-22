@@ -1,10 +1,11 @@
 <?php
 
-// 1. Nạp Database và Model User (Lùi 2 cấp từ app/Tests/User về app/)
+// 1. Nạp Database, Model và Controller
 require_once __DIR__ . '/../../Core/Database.php';
 require_once __DIR__ . '/../../Models/User.php';
+require_once __DIR__ . '/../../Controllers/Admin/UserController.php';
 
-use App\Model\User;
+use App\Controllers\Admin\UserController;
 
 $searchId = isset($_GET['id']) && trim($_GET['id']) !== '' ? (int) $_GET['id'] : null;
 $user = null;
@@ -13,8 +14,8 @@ $hasSearched = $searchId !== null;
 
 if ($hasSearched) {
     try {
-        $userModel = new User();
-        $user = $userModel->findById($searchId);
+        $userController = new UserController();
+        $user = $userController->findById($searchId);
     } catch (Exception $e) {
         $errorMessage = $e->getMessage();
     }
@@ -121,7 +122,8 @@ function getRoleBadgeClass($role)
                             <div>
                                 <h2 class="text-xl font-bold"><?= htmlspecialchars($user['username'] ?? '') ?></h2>
                                 <p class="text-xs text-indigo-100 font-mono mt-0.5">
-                                    <?= htmlspecialchars($user['email'] ?? '') ?></p>
+                                    <?= htmlspecialchars($user['email'] ?? '') ?>
+                                </p>
                             </div>
                         </div>
                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-indigo-700 shadow-sm">

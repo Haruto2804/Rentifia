@@ -12,8 +12,8 @@ class User
     private string $role;
     private ?string $reset_token;
     private bool $is_active;
-    private string $created_at;
-    private string $updated_at;
+    private ?string $created_at;
+    private ?string $updated_at;
 
     public function __construct(?int $id = null, string $username = '', string $password_hash = '', string $email = '', string $role = 'tenant', ?string $reset_token = null, bool $is_active = true, ?string $created_at = null, ?string $updated_at = null)
     {
@@ -28,6 +28,7 @@ class User
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
     }
+
     // ================= GETTERS & SETTERS =================
 
     public function getId(): ?int
