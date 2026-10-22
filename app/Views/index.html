@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentifia - Hệ Thống Chuỗi Căn Hộ Dịch Vụ & Nhà Trọ Thông Minh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- 1. HEADER & NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-500/25 group-hover:scale-105 transition-transform">
+                    R
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">
+                        Rent<span class="text-brand-500">ifia</span>
+                    </span>
+                    <span class="text-[10px] font-semibold text-slate-400 tracking-wider uppercase mt-1">Smart Living Space</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="#about" class="hover:text-brand-600 transition-colors">Về Rentifia</a>
+                <a href="#rooms" class="hover:text-brand-600 transition-colors">Danh sách phòng</a>
+                <a href="#features" class="hover:text-brand-600 transition-colors">Tiện ích thông minh</a>
+                <a href="#portal" class="hover:text-brand-600 transition-colors">Cổng dịch vụ</a>
+                <a href="#faq" class="hover:text-brand-600 transition-colors">Hỏi đáp</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <a href="/Rentifia/app/Views/auth/login.php"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-slate-900 hover:bg-brand-600 text-white font-semibold text-xs tracking-wide transition-all shadow-sm shadow-slate-900/10 hover:shadow-md hover:shadow-brand-500/25 active:scale-95">
+                    <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg>
+                    <span>Cổng Cư Dân / Đăng Nhập</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 hero-pattern relative overflow-hidden">
+        <!-- Ambient Blur Orbs -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-200/50 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -left-40 w-96 h-96 bg-teal-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Headline & Search Bar (7/12) -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-200/80 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        Hệ thống căn hộ dịch vụ cao cấp thế hệ mới
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-950 tracking-tight leading-[1.15]">
+                        Không gian sống hiện đại, <br>
+                        <span class="bg-gradient-to-r from-brand-600 to-teal-500 bg-clip-text text-transparent">
+                            Vận hành thảnh thơi
+                        </span>
+                        cho bạn.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
+                        Rentifia mang đến trải nghiệm lưu trú vượt trội: phòng ốc chuẩn phong cách Bắc Âu, hợp đồng số hóa minh bạch, chốt điện nước bằng ảnh thật và thanh toán VietQR gạch nợ tức thì.
+                    </p>
+
+                    <!-- Quick Filter Box (Frontend Search Box) -->
+                    <div class="bg-white rounded-3xl p-3 sm:p-4 shadow-xl shadow-slate-200/70 border border-slate-100 max-w-2xl">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-1">
+                            <!-- Dropdown 1: Khu vực -->
+                            <div class="p-3 bg-slate-50/80 rounded-2xl hover:bg-slate-100/80 transition-colors">
+                                <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Khu vực</label>
+                                <select class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
+                                    <option value="">Tất cả chi nhánh</option>
+                                    <option value="q7">Quận 7 (Him Lam)</option>
+                                    <option value="bt">Bình Thạnh (D2, Hàng Xanh)</option>
+                                    <option value="pn">Phú Nhuận (Phan Xích Long)</option>
+                                    <option value="tb">Tân Bình (Cộng Hòa)</option>
+                                </select>
+                            </div>
+
+                            <!-- Dropdown 2: Loại phòng -->
+                            <div class="p-3 bg-slate-50/80 rounded-2xl hover:bg-slate-100/80 transition-colors">
+                                <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Loại phòng</label>
+                                <select class="w-full bg-transparent text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer">
+                                    <option value="">Mọi loại phòng</option>
+                                    <option value="studio">Studio ban công</option>
+                                    <option value="duplex">Duplex gác cao</option>
+                                    <option value="1pn">1 Phòng ngủ riêng biệt</option>
+                                </select>
+                            </div>
+
+                            <!-- Nút Tìm kiếm -->
+                            <div class="flex items-center">
+                                <button type="button" onclick="document.getElementById('rooms').scrollIntoView({behavior: 'smooth'})"
+                                    class="w-full h-full min-h-[52px] bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm rounded-2xl shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2 active:scale-95">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    <span>Tìm phòng</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trust Stats -->
+                    <div class="grid grid-cols-3 gap-6 pt-2 max-w-lg border-t border-slate-200/80">
+                        <div>
+                            <div class="text-2xl font-extrabold text-slate-900">2,500+</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">Cư dân hạnh phúc</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-extrabold text-brand-600">98.5%</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">Tỷ lệ lấp đầy</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-extrabold text-slate-900">100%</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">Hóa đơn điện tử</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Cards (5/12) -->
+                <div class="lg:col-span-5 relative">
+                    <!-- Main Card Image -->
+                    <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-950/20 border-4 border-white aspect-[4/5] max-w-md mx-auto">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80" 
+                            alt="Căn hộ dịch vụ Rentifia hiện đại" 
+                            class="w-full h-full object-cover">
+                        
+                        <!-- Floating Glassmorphism Tag -->
+                        <div class="absolute bottom-6 inset-x-6 bg-slate-950/70 backdrop-blur-md rounded-2xl p-4 text-white border border-white/20">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-bold uppercase tracking-wider text-brand-400">Chi nhánh Him Lam, Q7</span>
+                                <span class="text-xs font-bold text-white bg-brand-500/80 px-2 py-0.5 rounded-md">Còn phòng</span>
+                            </div>
+                            <h3 class="text-sm font-semibold truncate">Studio Scandinavian Full Nội Thất Cao Cấp</h3>
+                            <div class="flex items-center justify-between mt-2 pt-2 border-t border-white/10 text-xs">
+                                <span class="text-slate-300">Giá chỉ từ:</span>
+                                <span class="text-sm font-bold text-brand-300">5.500.000 đ/tháng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Decorative Floater -->
+                    <div class="hidden sm:flex absolute -top-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+                            ⚡
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">VietQR Gạch Nợ Tức Thì</div>
+                            <div class="text-[11px] text-slate-500">Xác nhận thanh toán trong 3s</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. VALUE PROPOSITIONS (TẠI SAO CHỌN RENTIFIA) -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold tracking-wider uppercase text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
+                    Trải Nghiệm Cư Dân 4.0
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mt-3">
+                    Xóa bỏ mọi phiền toái khi ở trọ truyền thống
+                </h2>
+                <p class="text-sm sm:text-base text-slate-500 mt-3 leading-relaxed">
+                    Rentifia tự động hóa toàn bộ quy trình vận hành giúp mọi trải nghiệm của bạn luôn minh bạch, chính xác và tiện lợi nhất.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        📸
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Chốt Điện Nước Có Ảnh</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Chỉ số điện nước định kỳ đều được quản lý chụp ảnh mặt đồng hồ làm bằng chứng đối chiếu trực tiếp trên app.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        💳
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">VietQR Gạch Nợ Tức Thì</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Tự động sinh mã VietQR theo số tiền thực tế của hóa đơn. Quét là thanh toán, gạch nợ tự động không cần gửi bill.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        📑
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Hợp Đồng Lưu Trú Số</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Hợp đồng được số hóa, quản lý thành viên phòng, tiền cọc rõ ràng và tự động nhắc nhở khi đến kỳ hạn.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        🔒
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">An Ninh Khóa Vân Tay 24/7</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        Hệ thống cửa cổng vân tay/thẻ từ độc lập, camera giám sát an ninh các tầng và giờ giấc hoàn toàn tự do.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ROOM SHOWCASE (DANH SÁCH PHÒNG ĐANG TRỐNG) -->
+    <section id="rooms" class="py-20 bg-slate-50 border-t border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="text-xs font-bold tracking-wider uppercase text-brand-600 bg-brand-100/70 px-3 py-1 rounded-full">
+                        Hệ Thống Phòng Trống
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mt-2">
+                        Căn hộ sẵn sàng dọn vào ở ngay
+                    </h2>
+                </div>
+                <div class="text-sm text-slate-500 font-medium">
+                    Hình ảnh chụp thực tế 100% tại các chi nhánh Rentifia
+                </div>
+            </div>
+
+            <!-- Rooms Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Room Card 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" 
+                            alt="Studio ban công Quận 7" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-brand-500 text-white shadow-md">
+                            Phòng Trống
+                        </span>
+                        <span class="absolute bottom-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-white backdrop-blur-md">
+                            28 m² • Tầng 2
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-bold uppercase text-brand-600 mb-1">Quận 7 • Chi nhánh Him Lam</div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                                Studio Ban Công Thoáng Mát Full Nội Thất
+                            </h3>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Máy lạnh Inverter</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Tủ lạnh 2 cánh</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Ban công riêng</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Đơn giá thuê:</span>
+                                <span class="text-xl font-extrabold text-slate-950">5.500.000 <span class="text-xs font-normal text-slate-500">đ/tháng</span></span>
+                            </div>
+                            <a href="/Rentifia/app/Views/auth/login.php" class="px-4 py-2 bg-slate-900 hover:bg-brand-600 text-white rounded-xl text-xs font-bold transition-all">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Card 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" 
+                            alt="Duplex gác cao Bình Thạnh" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-md">
+                            Phòng Hot
+                        </span>
+                        <span class="absolute bottom-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-white backdrop-blur-md">
+                            32 m² • Tầng 3
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-bold uppercase text-brand-600 mb-1">Bình Thạnh • Đường D2</div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                                Duplex Gác Đứng Không Đụng Đầu Hiện Đại
+                            </h3>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Gác cao 2m</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Bếp riêng tách mùi</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Máy giặt riêng</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Đơn giá thuê:</span>
+                                <span class="text-xl font-extrabold text-slate-950">6.200.000 <span class="text-xs font-normal text-slate-500">đ/tháng</span></span>
+                            </div>
+                            <a href="/Rentifia/app/Views/auth/login.php" class="px-4 py-2 bg-slate-900 hover:bg-brand-600 text-white rounded-xl text-xs font-bold transition-all">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Card 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" 
+                            alt="1 Phòng ngủ Phú Nhuận" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-brand-500 text-white shadow-md">
+                            Mới Hoàn Thiện
+                        </span>
+                        <span class="absolute bottom-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-white backdrop-blur-md">
+                            38 m² • Tầng 4
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs font-bold uppercase text-brand-600 mb-1">Phú Nhuận • Phan Xích Long</div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                                1 Phòng Ngủ Riêng Biệt View Cây Xanh
+                            </h3>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Phòng khách & bếp</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Smart TV 50 inch</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">Nội thất gỗ sồi</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Đơn giá thuê:</span>
+                                <span class="text-xl font-extrabold text-slate-950">7.800.000 <span class="text-xs font-normal text-slate-500">đ/tháng</span></span>
+                            </div>
+                            <a href="/Rentifia/app/Views/auth/login.php" class="px-4 py-2 bg-slate-900 hover:bg-brand-600 text-white rounded-xl text-xs font-bold transition-all">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PORTAL CALL-TO-ACTION (DÀNH CHO CƯ DÂN & BAN QUẢN LÝ) -->
+    <section id="portal" class="py-20 bg-slate-950 text-white relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-[2.5rem] border border-slate-800 p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div class="space-y-4 max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-400">
+                        Cổng Dịch Vụ Cư Dân & Ban Vận Hành
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                        Bạn đã là cư dân hoặc người quản lý tại Rentifia?
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+                        Đăng nhập ngay để theo dõi lịch sử chỉ số điện nước, tra cứu và thanh toán hóa đơn bằng VietQR động, gửi phản hồi báo hỏng chỉ với 1 chạm.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="/Rentifia/app/Views/auth/login.php"
+                        class="px-8 py-4 rounded-2xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-sm tracking-wide text-center transition-all shadow-lg shadow-brand-500/25 active:scale-95">
+                        Đăng nhập tài khoản
+                    </a>
+                    <a href="#rooms"
+                        class="px-8 py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm tracking-wide text-center border border-slate-700 transition-all">
+                        Khám phá phòng trống
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FAQ (CÂU HỎI THƯỜNG GẶP) -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
+                    Giải Đáp Thắc Mắc
+                </span>
+                <h2 class="text-3xl font-extrabold text-slate-950 tracking-tight mt-2">
+                    Câu hỏi thường gặp
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/50 hover:bg-white transition-all">
+                    <h3 class="font-bold text-slate-900 text-base">Thủ tục cọc và làm hợp đồng như thế nào?</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+                        Chỉ cần mang CCCD/Hộ chiếu. Hợp đồng ký điện tử trực tiếp trên hệ thống Rentifia. Tiền cọc tương đương 1 tháng tiền phòng và được lưu trữ minh bạch trên hệ thống, cam kết hoàn trả 100% khi kết thúc hợp đồng theo quy định.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/50 hover:bg-white transition-all">
+                    <h3 class="font-bold text-slate-900 text-base">Hóa đơn điện nước hàng tháng tính ra sao?</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+                        Vào cuối chu kỳ (ngày 25 - 28 hàng tháng), ban quản lý sẽ chụp ảnh chỉ số đồng hồ điện nước thực tế của phòng bạn. Hệ thống tự động tính theo đơn giá niêm yết trong hợp đồng và gửi phiếu báo tiền kèm hình ảnh đối chứng.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-2xl p-6 bg-slate-50/50 hover:bg-white transition-all">
+                    <h3 class="font-bold text-slate-900 text-base">Giờ giấc ra vào tại các tòa nhà có bị giới hạn không?</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+                        100% chi nhánh của Rentifia hoạt động tự do 24/7. Cư dân được cấp quyền vân tay hoặc thẻ từ thông minh, bạn có thể chủ động đi lại bất kỳ khung giờ nào mà không phụ thuộc vào người khác.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-14 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-brand-500 text-slate-950 font-black flex items-center justify-center text-base">
+                            R
+                        </div>
+                        <span class="text-xl font-extrabold text-white">Rent<span class="text-brand-500">ifia</span></span>
+                    </div>
+                    <p class="text-slate-500 leading-relaxed">
+                        Nền tảng quản lý và vận hành chuỗi căn hộ dịch vụ, nhà trọ thông minh hàng đầu tại TP. Hồ Chí Minh.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4">Chi nhánh tiêu biểu</h4>
+                    <ul class="space-y-2">
+                        <li>Khu đô thị Him Lam, Quận 7</li>
+                        <li>Đường D2 / Ung Văn Khiêm, Bình Thạnh</li>
+                        <li>Phan Xích Long, Phú Nhuận</li>
+                        <li>Cộng Hòa, Tân Bình</li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4">Hệ thống</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#rooms" class="hover:text-white transition-colors">Tra cứu phòng trống</a></li>
+                        <li><a href="/Rentifia/app/Views/auth/login.php" class="hover:text-white transition-colors">Cổng đăng nhập cư dân</a></li>
+                        <li><a href="#features" class="hover:text-white transition-colors">Tiện ích thông minh</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">Quy định thuê phòng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4">Liên hệ hỗ trợ</h4>
+                    <ul class="space-y-2">
+                        <li>Hotline: <strong class="text-white">1900 8888 (24/7)</strong></li>
+                        <li>Email: <a href="mailto:support@rentifia.vn" class="text-brand-400 hover:underline">support@rentifia.vn</a></li>
+                        <li>Trụ sở: TP. Hồ Chí Minh, Việt Nam</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+                <div>© 2026 Rentifia System. Dự án Thực tập Chuyên ngành D23_TH10.</div>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-slate-300">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-slate-300">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
