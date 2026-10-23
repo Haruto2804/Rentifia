@@ -46,9 +46,11 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
                 transform: scale(0.6);
                 opacity: 0;
             }
+
             70% {
                 transform: scale(1.15);
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
@@ -73,7 +75,8 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
             <div class="flex items-center justify-between mb-6 sm:mb-8">
                 <!-- Logo -->
                 <a href="/Rentifia/app/Views/index.html" class="flex items-center gap-2 group">
-                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 group-hover:opacity-90 transition-opacity">
+                    <span
+                        class="text-2xl font-extrabold tracking-tight text-slate-900 group-hover:opacity-90 transition-opacity">
                         Rent<span class="text-emerald-500">ifia</span>
                     </span>
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -95,10 +98,13 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
                 <!-- Icon thành công với vòng sáng -->
                 <div class="relative mx-auto mb-6 w-20 h-20 flex items-center justify-center animate-pop">
                     <div class="absolute inset-0 bg-emerald-100 rounded-full scale-110 animate-ping opacity-25"></div>
-                    <div class="w-20 h-20 bg-emerald-50 rounded-full ring-8 ring-emerald-50/70 flex items-center justify-center">
-                        <div class="w-14 h-14 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 text-white">
+                    <div
+                        class="w-20 h-20 bg-emerald-50 rounded-full ring-8 ring-emerald-50/70 flex items-center justify-center">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 text-white">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
                     </div>
@@ -115,17 +121,21 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
 
                 <!-- Thẻ thông tin tài khoản (nếu có username) -->
                 <?php if (!empty($registeredUsername)): ?>
-                    <div class="mb-6 p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between text-left">
+                    <div
+                        class="mb-6 p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between text-left">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">
                                 <?= strtoupper(substr(htmlspecialchars($registeredUsername), 0, 1)) ?>
                             </div>
                             <div>
                                 <p class="text-xs text-slate-400 font-medium">Tên đăng nhập</p>
-                                <p class="text-sm font-semibold text-slate-800"><?= htmlspecialchars($registeredUsername) ?></p>
+                                <p class="text-sm font-semibold text-slate-800"><?= htmlspecialchars($registeredUsername) ?>
+                                </p>
                             </div>
                         </div>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-semibold rounded-full">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-semibold rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                             Hoạt động
                         </span>
@@ -133,13 +143,17 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
                 <?php endif; ?>
 
                 <!-- Thông báo tự động chuyển hướng -->
-                <div class="mb-6 p-3 bg-slate-50/80 border border-slate-100 rounded-2xl flex items-center justify-center gap-2 text-xs text-slate-600">
+                <div
+                    class="mb-6 p-3 bg-slate-50/80 border border-slate-100 rounded-2xl flex items-center justify-center gap-2 text-xs text-slate-600">
                     <svg class="w-4 h-4 text-emerald-500 flex-shrink-0 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                     </svg>
-                    <span>Tự động chuyển đến trang Đăng nhập sau <span id="countdown" class="font-bold text-emerald-600">5</span> giây</span>
-                    <button type="button" id="toggleRedirectBtn" onclick="toggleRedirect()" class="text-slate-400 hover:text-slate-700 font-medium underline ml-1">
+                    <span>Tự động chuyển đến trang chủ <span id="countdown" class="font-bold text-emerald-600">5</span>
+                        giây</span>
+                    <button type="button" id="toggleRedirectBtn" onclick="toggleRedirect()"
+                        class="text-slate-400 hover:text-slate-700 font-medium underline ml-1">
                         Dừng lại
                     </button>
                 </div>
@@ -150,7 +164,8 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
                         class="w-full py-4 bg-slate-950 hover:bg-slate-800 text-white font-semibold text-sm rounded-2xl shadow-lg shadow-slate-950/20 transition-all active:scale-[0.99] flex items-center justify-center gap-2">
                         <span>Đăng nhập ngay</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </a>
 
@@ -186,9 +201,12 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
 
             <!-- Hộp Kính Mờ Glassmorphism nổi bật -->
             <div class="absolute inset-x-8 bottom-10 z-10">
-                <div class="glass-card rounded-[2rem] p-7 text-white shadow-2xl relative overflow-hidden backdrop-blur-xl">
+                <div
+                    class="glass-card rounded-[2rem] p-7 text-white shadow-2xl relative overflow-hidden backdrop-blur-xl">
                     <!-- Ánh sáng dịu nhẹ góc card -->
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-400/20 rounded-full blur-2xl pointer-events-none"></div>
+                    <div
+                        class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-400/20 rounded-full blur-2xl pointer-events-none">
+                    </div>
 
                     <!-- Badge nổi bật phía trên tiêu đề -->
                     <span class="inline-block text-[11px] font-semibold text-emerald-300 uppercase tracking-wider mb-2">
@@ -202,16 +220,22 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
                     <!-- Hướng dẫn các bước tiếp theo -->
                     <ul class="space-y-2.5 text-xs text-white/85 font-medium">
                         <li class="flex items-start gap-2.5">
-                            <span class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">1</span>
-                            <span><strong>Đăng nhập tài khoản:</strong> Truy cập hệ thống bằng tên đăng nhập và mật khẩu vừa tạo.</span>
+                            <span
+                                class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">1</span>
+                            <span><strong>Đăng nhập tài khoản:</strong> Truy cập hệ thống bằng tên đăng nhập và mật khẩu
+                                vừa tạo.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">2</span>
-                            <span><strong>Thiết lập cơ sở & phòng:</strong> Thêm thông tin nhà trọ, căn hộ và biểu phí dịch vụ điện/nước.</span>
+                            <span
+                                class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">2</span>
+                            <span><strong>Thiết lập cơ sở & phòng:</strong> Thêm thông tin nhà trọ, căn hộ và biểu phí
+                                dịch vụ điện/nước.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <span class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">3</span>
-                            <span><strong>Quản lý tự động hóa:</strong> Thêm khách thuê, tạo hợp đồng điện tử và xuất hóa đơn định kỳ.</span>
+                            <span
+                                class="w-5 h-5 rounded-full bg-emerald-500/30 text-emerald-300 flex items-center justify-center text-[11px] font-bold flex-shrink-0 mt-0.5">3</span>
+                            <span><strong>Quản lý tự động hóa:</strong> Thêm khách thuê, tạo hợp đồng điện tử và xuất
+                                hóa đơn định kỳ.</span>
                         </li>
                     </ul>
                 </div>
@@ -237,7 +261,7 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
 
             if (timeLeft <= 0) {
                 clearInterval(interval);
-                window.location.href = '/Rentifia/app/Views/auth/login.php';
+                window.location.href = '/Rentifia/app/Views/index.php';
             }
         }, 1000);
 

@@ -28,21 +28,48 @@ class AuthController
             header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/Rentifia/app/Views/auth/login.php'));
             exit;
         }
-        try {
 
+        try {
             $user = $this->userController->findByUsername($username);
             if (!$user) {
-                $_SESSION['flash_error'] = "Không có user trong hệ thống !!!";
+                $_SESSION['flash_error'] = "Tài khoản không tồn tại trong hệ thống!";
                 header("Location: /Rentifia/app/Views/auth/login.php");
                 exit;
             }
+
+            if (!$user->getIsActive()) {
+                $_SESSION['flash_error'] = "Tài khoản của bạn đang bị tạm khóa. Vui lòng liên hệ quản trị viên!";
+                header("Location: /Rentifia/app/Views/auth/login.php");
+                exit;
+            }
+
             $result = password_verify($password, $user->getPasswordHash());
             if (!$result) {
-                $_SESSION["flash_error"] = "Tên tài khoản hoặc username sai! Kiểm tra lại!";
+                $_SESSION["flash_error"] = "Mật khẩu không chính xác. Vui lòng kiểm tra lại!";
                 header("Location: /Rentifia/app/Views/auth/login.php");
                 exit;
             }
-            header("Location: /Rentifia/app/Views/index.html");
+
+            // 1. Khởi tạo session an toàn
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user->getId();
+            $_SESSION['username'] = $user->getUsername();
+            $_SESSION['email'] = $user->getEmail();
+            $_SESSION['role'] = $user->getRole();
+            $_SESSION['logged_in'] = true;
+
+            // 2. Phân luồng điều hướng theo Role đến từng Dashboard chuyên biệt
+            $redirectUrl = match ($user->getRole()) {
+                'admin' => '/Rentifia/app/Views/admin/dashboard/index.php',
+                'manager' => '/Rentifia/app/Views/manager/dashboard/index.php',
+                'tenant' => '/Rentifia/app/Views/tenant/dashboard/index.php',
+                default => '/Rentifia/app/Views/auth/login.php',
+            };
+
+            header("Location: " . $redirectUrl);
             exit;
         } catch (PDOException $e) {
             $_SESSION["flash_error"] = $e->getMessage();
@@ -117,5 +144,32 @@ class AuthController
         }
     }
 
+    public function logout(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+        session_destroy();
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['flash_success'] = "Bạn đã đăng xuất khỏi hệ thống thành công!";
+        header("Location: /Rentifia/app/Views/auth/login.php");
+        exit();
+    }
 }
 ?>

@@ -8,11 +8,17 @@ use App\Controllers\Auth\AuthController;
 
 require_once __DIR__ . '/../../Controllers/Auth/AuthController.php';
 
-$errorMessage = $_SESSION['flash_error'] ?? '';
-unset($_SESSION['flash_error']); // Lấy xong thì xóa đi để F5 không bị hiện lại
+$errorMessage   = $_SESSION['flash_error'] ?? '';
+$successMessage = $_SESSION['flash_success'] ?? '';
+unset($_SESSION['flash_error'], $_SESSION['flash_success']);
+
+$authController = new AuthController();
+
+if (($_GET['action'] ?? '') === 'logout') {
+    $authController->logout();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') === 'login') {
-    $authController = new AuthController();
     $authController->login();
 }
 ?>
@@ -92,6 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') === 'login'
                     </p>
                 </div>
 
+                <!-- Hiển thị thông báo thành công nếu có -->
+                <?php if (!empty($successMessage)): ?>
+                    <div class="mb-5 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-2xl flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><?= htmlspecialchars($successMessage) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Hiển thị thông báo lỗi nếu có -->
                 <?php if (isset($errorMessage) && !empty($errorMessage)): ?>
                     <div
@@ -136,13 +152,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') === 'login'
                             </svg>
                         </button>
                     </div>
-                    <!-- Quên mật khẩu link -->
-                    <div class="flex items-center justify-start pt-1">
-                        <a href="#"
-                            class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
-                            Quên mật khẩu?
-                        </a>
+                    <div class="flex justify-between">
+                        <div class="flex items-center justify-start pt-1">
+                            <a href="#"
+                                class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
+                                Quên mật khẩu?
+                            </a>
+                        </div>
+                        <div class="flex items-center justify-start pt-1">
+                            <a href="./register.php"
+                                class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
+                                Chưa có tài khoản? Đăng kí ngay
+                            </a>
+                        </div>
                     </div>
+                    <!-- Quên mật khẩu link -->
+
 
                     <!-- Nút Đăng nhập -->
                     <div class="pt-2">
