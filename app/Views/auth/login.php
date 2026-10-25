@@ -18,6 +18,9 @@ if (($_GET['action'] ?? '') === 'logout') {
     $authController->logout();
 }
 
+require_once __DIR__ . '/../../Middlewares/AuthMiddleware.php';
+\App\Middlewares\AuthMiddleware::requireGuest();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && ($_POST['action'] ?? '') === 'login') {
     $authController->login();
 }

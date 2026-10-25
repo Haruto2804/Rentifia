@@ -1,7 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../../../Middlewares/AuthMiddleware.php';
+\App\Middlewares\AuthMiddleware::requireRole('tenant');
 
 $currentUsername = $_SESSION['username'] ?? 'nhathoang_tenent';
 $currentRole     = $_SESSION['role'] ?? 'tenant';

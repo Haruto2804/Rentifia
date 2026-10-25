@@ -7,6 +7,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once __DIR__ . '/../../Middlewares/AuthMiddleware.php';
+\App\Middlewares\AuthMiddleware::requireGuest();
+
 $errorMessage = $_SESSION['flash_error'] ?? '';
 unset($_SESSION['flash_error']);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'register') {
