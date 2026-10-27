@@ -296,6 +296,14 @@ $currentEmail    = $_SESSION['email'] ?? 'admin@rentifia.vn';
                         </svg>
                         <span>Mẫu in PDF & Báo cáo</span>
                     </a>
+                    <a href="/Rentifia/app/Views/auth/logout.php"
+                        class="flex items-center gap-3 px-3.5 py-2 rounded-2xl text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-500/10 text-xs font-semibold transition-colors">
+                        <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </a>
                 </nav>
 
                 <!-- Profile chủ trọ / Admin -->
@@ -304,12 +312,12 @@ $currentEmail    = $_SESSION['email'] ?? 'admin@rentifia.vn';
                         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
                             alt="Admin Rentifia" class="w-9 h-9 rounded-full object-cover ring-2 ring-emerald-500/30">
                         <div class="leading-tight">
-                            <p class="text-xs font-bold text-slate-900 dark:text-white">Gia Bảo (Admin)</p>
-                            <p class="text-[11px] text-slate-400">admin@rentifia.vn</p>
+                            <p class="text-xs font-bold text-slate-900 dark:text-white"><?= htmlspecialchars($currentUsername) ?> (Admin)</p>
+                            <p class="text-[11px] text-slate-400"><?= htmlspecialchars($currentEmail) ?></p>
                         </div>
                     </div>
-                    <a href="/Rentifia/app/Views/auth/login.php" title="Đăng xuất"
-                        class="text-slate-400 hover:text-rose-500 p-1 rounded transition-colors">
+                    <a href="/Rentifia/app/Views/auth/logout.php" title="Đăng xuất khỏi hệ thống"
+                        class="text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 p-1.5 rounded-lg transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

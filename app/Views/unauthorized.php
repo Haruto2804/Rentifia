@@ -100,7 +100,7 @@ $dashboardUrl = match ($currentRole) {
                     <span>Quay lại</span>
                 </a>
 
-                <!-- Nếu đã đăng nhập, vẫn hỗ trợ nút về Dashboard của role đó -->
+                <!-- Nếu đã đăng nhập, vẫn hỗ trợ nút về Dashboard của role đó và Đăng xuất -->
                 <?php if ($isLoggedIn && $currentRole !== 'guest'): ?>
                     <a href="<?= $dashboardUrl ?>"
                         class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/40 hover:bg-white/60 text-[#09154a] font-bold text-xs backdrop-blur-sm border border-white/60 transition-all hover:scale-105">
@@ -108,6 +108,14 @@ $dashboardUrl = match ($currentRole) {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <span>Về trang <?= ucfirst($currentRole) ?></span>
+                    </a>
+                    <a href="/Rentifia/app/Views/auth/logout.php"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs border border-rose-200 transition-all hover:scale-105"
+                        title="Đăng xuất để đổi tài khoản">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Đăng xuất</span>
                     </a>
                 <?php endif; ?>
             </div>

@@ -127,7 +127,7 @@ $currentEmail    = $_SESSION['email'] ?? 'nhathoang.tenant@rentifia.vn';
                 </div>
 
                 <div class="space-y-1 pt-2 border-t border-slate-100">
-                    <a href="/Rentifia/app/Views/auth/login.php" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-rose-600 hover:bg-rose-50 font-medium text-sm">
+                    <a href="/Rentifia/app/Views/auth/logout.php" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-rose-600 hover:bg-rose-50 font-medium text-sm">
                         <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                         <span>Đăng xuất</span>
                     </a>
@@ -155,6 +155,13 @@ $currentEmail    = $_SESSION['email'] ?? 'nhathoang.tenant@rentifia.vn';
                         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                         Đang cư trú hợp lệ
                     </span>
+                    <a href="/Rentifia/app/Views/auth/logout.php" title="Đăng xuất khỏi hệ thống"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 text-xs font-medium transition-colors">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </a>
                 </div>
             </header>
 

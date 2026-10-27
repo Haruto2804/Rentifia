@@ -275,7 +275,7 @@ $currentEmail    = $_SESSION['email'] ?? 'chuongbut.manager@rentifia.vn';
                         </svg>
                         <span>Cấu hình chi nhánh</span>
                     </a>
-                    <a href="/Rentifia/app/Views/auth/login.php"
+                    <a href="/Rentifia/app/Views/auth/logout.php"
                         class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-rose-600 hover:bg-rose-50 font-medium text-sm transition-all">
                         <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
@@ -378,6 +378,13 @@ $currentEmail    = $_SESSION['email'] ?? 'chuongbut.manager@rentifia.vn';
                             <span
                                 class="text-[11px] text-slate-400 font-medium"><?= htmlspecialchars($currentEmail) ?></span>
                         </div>
+                        <a href="/Rentifia/app/Views/auth/logout.php" title="Đăng xuất khỏi hệ thống"
+                            class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-full transition-colors ml-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </header>

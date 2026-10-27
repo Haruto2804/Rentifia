@@ -157,9 +157,14 @@ $dashboardUrl = match ($currentRole) {
                             <rect x="14" y="14" width="7" height="7" rx="1.5" stroke-width="2" />
                             <rect x="3" y="14" width="7" height="7" rx="1.5" stroke-width="2" />
                         </svg>
-                        <span>Vào Dashboard (
-                            <?= ucfirst($currentRole) ?>)
-                        </span>
+                        <span>Dashboard (<?= ucfirst($currentRole) ?>)</span>
+                    </a>
+                    <a href="/Rentifia/app/Views/auth/logout.php" title="Đăng xuất khỏi hệ thống"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 hover:border-rose-500/40 text-slate-300 hover:text-rose-400 text-xs font-semibold hover:bg-rose-500/10 transition-all">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span class="hidden sm:inline">Đăng xuất</span>
                     </a>
                 <?php else: ?>
                     <a href="/Rentifia/app/Views/auth/login.php"
