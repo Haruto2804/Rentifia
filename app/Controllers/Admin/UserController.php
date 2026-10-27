@@ -170,5 +170,32 @@ class UserController
             return null;
         }
     }
+
+    public function findByEmail(string $email): ?User
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$data) {
+                return null;
+            }
+            return new User(
+                (int) $data['id'],
+                $data['username'],
+                $data['password_hash'],
+                $data['email'],
+                $data['role'] ?? 'tenant',
+                $data['reset_token'] ?? null,
+                (bool) ($data['is_active'] ?? true),
+                $data['created_at'] ?? null,
+                $data['updated_at'] ?? null
+            );
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
 }
 ?>

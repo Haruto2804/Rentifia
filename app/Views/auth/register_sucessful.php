@@ -74,7 +74,7 @@ unset($_SESSION['registered_username'], $_SESSION['flash_success']);
             <!-- Thanh trên cùng: Logo & Ngôn ngữ -->
             <div class="flex items-center justify-between mb-6 sm:mb-8">
                 <!-- Logo -->
-                <a href="/Rentifia/app/Views/index.html" class="flex items-center gap-2 group">
+                <a href="/Rentifia/app/Views/index.php" class="flex items-center gap-2 group">
                     <span
                         class="text-2xl font-extrabold tracking-tight text-slate-900 group-hover:opacity-90 transition-opacity">
                         Rent<span class="text-emerald-500">ifia</span>
