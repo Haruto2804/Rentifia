@@ -69,10 +69,10 @@ $dashboardUrl = match ($currentRole) {
         </div>
 
         <!-- HÌNH ẢNH MINH HỌA (GIANT 401 & 2 QUÁI VẬT 3D ĐỘC ĐÁO) -->
-        <div class="relative w-full pt-8 sm:pt-10 px-2 sm:px-6 flex justify-center overflow-hidden">
-            <img src="/Rentifia/public/assets/images/unauthorized_banner.png"
+        <div class="relative w-full pt-8 sm:pt-10 px-4 sm:px-8 flex justify-center overflow-hidden">
+            <img src="/Rentifia/public/assets/images/unauthorized_monsters.jpg"
                 alt="401 - Hold on, You are not allowed here"
-                class="w-full max-w-[820px] h-auto object-contain pointer-events-none drop-shadow-md">
+                class="w-full max-w-[760px] h-auto object-contain rounded-2xl pointer-events-none shadow-md">
         </div>
 
         <!-- PHẦN TIÊU ĐỀ & NÚT HÀNH ĐỘNG DƯỚI CARD -->
@@ -87,9 +87,9 @@ $dashboardUrl = match ($currentRole) {
                 Bạn không có quyền truy cập vào khu vực này. Vui lòng quay lại trang chủ!
             </p>
 
-            <!-- Nút bấm quay lại trang chủ Views/index.html -->
+            <!-- Nút bấm quay lại trang chủ Views/index.php -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="/Rentifia/app/Views/index.html"
+                <a href="/Rentifia/app/Views/index.php"
                     class="btn-shadow inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white text-[#2d3748] font-bold text-sm hover:scale-105 active:scale-95 transition-all duration-200">
                     <!-- Icon mũi tên quay lại hình tròn phong cách ảnh mẫu -->
                     <span class="w-5 h-5 rounded-full bg-[#09154a] text-white flex items-center justify-center">
